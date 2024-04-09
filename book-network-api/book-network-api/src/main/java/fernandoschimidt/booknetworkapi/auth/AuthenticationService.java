@@ -1,12 +1,16 @@
 package fernandoschimidt.booknetworkapi.auth;
 
 import fernandoschimidt.booknetworkapi.email.EmailService;
+import fernandoschimidt.booknetworkapi.email.EmailTemplateName;
 import fernandoschimidt.booknetworkapi.role.RoleRepository;
 import fernandoschimidt.booknetworkapi.user.Token;
 import fernandoschimidt.booknetworkapi.user.TokenRepository;
 import fernandoschimidt.booknetworkapi.user.User;
 import fernandoschimidt.booknetworkapi.user.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +27,10 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final EmailService emailService;
+    @Value("${frontend.activation.url}")
+    private String activationUrl;
 
-    public void register(RegistrationRequest request) {
+    public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                 .orElseThrow(() -> new IllegalStateException("ROLE USER was not initialized"));
         var user = User.builder()
@@ -41,9 +47,18 @@ public class AuthenticationService {
 
     }
 
-    private void sendValidationEmail(User user) {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
         //send email
+
+        emailService.sendEmail(
+                user.getEmail(),
+                user.fullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationUrl,
+                newToken,
+                "Account activation"
+        );
     }
 
     private String generateAndSaveActivationToken(User user) {
