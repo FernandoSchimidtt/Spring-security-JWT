@@ -1,0 +1,52 @@
+spring:
+  profiles:
+    active: dev
+#  servlet:
+#    multipart:
+#      max-file-size: 50MB
+#springdoc:
+#  default-produces-media-type: application/json
+
+#server:
+#  servlet:
+#    context-path: /api/v1/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#spring.datasource.url= jdbc:postgresql://localhost:5432/book_social_network
+#spring.datasource.username=postgres
+#spring.datasource.password=secret
+#spring.jpa.hibernate.ddl-auto=update
+#
+#frontend.activation.url=http://localhost:4200/
+#
+#spring.mail.host=localhost
+#spring.mail.port=1025
+#spring.mail.username=fernandoschimidtjava@gmail.com
+#spring.mail.password=tworrfhgrumkgwgk
+#spring.mail.properties.mail.smtp.auth=true
+#spring.mail.properties.mail.smtp.starttls.enable=true
+
+
+

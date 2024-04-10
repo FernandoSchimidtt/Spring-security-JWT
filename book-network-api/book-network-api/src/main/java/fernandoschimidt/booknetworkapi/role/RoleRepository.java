@@ -1,6 +1,6 @@
 package fernandoschimidt.booknetworkapi.role;
 
-import fernandoschimidt.booknetworkapi.role.Role;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

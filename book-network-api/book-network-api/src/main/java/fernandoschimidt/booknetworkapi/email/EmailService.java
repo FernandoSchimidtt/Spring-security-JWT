@@ -32,7 +32,7 @@ public class EmailService {
     ) throws MessagingException {
         String templateName;
         if (emailTemplateName == null) {
-            templateName = "confirm-email";
+            templateName = "confirmemail";
         } else {
             templateName = emailTemplateName.name();
         }
@@ -47,7 +47,7 @@ public class EmailService {
         Map<String, Object> properties = new HashMap<>();
         properties.put("username", username);
         properties.put("confirmationUrl", confirmationUrl);
-        properties.put("activation_code", activationCode);
+        properties.put("activationcode", activationCode);
 
         Context context = new Context();
         context.setVariables(properties);
